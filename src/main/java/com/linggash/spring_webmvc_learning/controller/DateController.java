@@ -15,7 +15,7 @@ public class DateController {
 
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
-    @GetMapping(value = "/date")
+    @GetMapping(path = "/date")
     @ResponseBody
     public String getDate(@RequestParam(name = "date") Date date) throws IOException {
         return "Date : " + dateFormat.format(date);
