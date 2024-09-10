@@ -52,4 +52,30 @@ class PersonControllerTest {
                 ))
         );
     }
+
+    @Test
+    void testCreatePersonValidationError() throws Exception {
+        mockMvc.perform(
+                post("/person")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("middleName", "Udin")
+                        .param("lastName", "Ucok")
+                        .param("email", "bambang@email.com")
+                        .param("phone", "88149194")
+                        .param("address.street", "Jl Rusak")
+                        .param("address.city", "Depok")
+                        .param("address.country", "Indonesia")
+                        .param("address.postalCode", "12033")
+                        .param("hobbies[0]", "Running")
+                        .param("hobbies[0]", "Cycling")
+                        .param("hobbies[0]", "Coding")
+                        .param("hobbies[0]", "Gaming")
+                        .param("socialMedias[0].name", "Facebook")
+                        .param("socialMedias[0].location", "facebook.com/BambangUdin")
+                        .param("socialMedias[1].name", "Instagram")
+                        .param("socialMedias[1].location", "instagram.com/BambangUdin")
+        ).andExpectAll(
+                status().isBadRequest()
+        );
+    }
 }
