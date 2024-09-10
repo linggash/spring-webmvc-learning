@@ -31,4 +31,13 @@ class UserControllerTest {
                 content().string(Matchers.containsString("Hello bambang"))
         );
     }
+
+    @Test
+    void testGetUserInvalid() throws Exception {
+        mockMvc.perform(
+                get("/user/current")
+        ).andExpectAll(
+                status().is3xxRedirection()
+        );
+    }
 }
