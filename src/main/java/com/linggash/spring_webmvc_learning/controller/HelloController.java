@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 
 @Controller
 public class HelloController {
@@ -24,8 +25,11 @@ public class HelloController {
         response.getWriter().println(responseBody);
     }
 
-    @GetMapping(path = "/web")
+    @GetMapping(path = "/web/hello")
     public ModelAndView hell(@RequestParam(name = "name", required = false)String name){
+        if (Objects.isNull(name)) {
+            return new ModelAndView("redirect:/web/hello?name=Guest");
+        }
         return new ModelAndView("hello", Map.of(
                 "title", "View Learning",
                 "name", name
